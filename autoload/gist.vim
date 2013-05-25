@@ -122,8 +122,14 @@ function! s:GistList(gistls, page)
     endif
     setlocal modifiable
   else
-    let split_direction = get(g:, 'gist_list_split_direction', 'leftabove')
-    exec 'silent noautocmd '.split_direction.' 5 split +set\ winfixheight' s:bufprefix.a:gistls
+    let split_direction  = get(g:, 'gist_list_split_direction', 'leftabove')
+    let split_win_height = get(g:, 'gist_list_split_window_height', 0)
+    if split_win_height <= 0
+      let split_win_height = ''
+    endif
+    exec 'silent noautocmd '.
+    \ split_direction.' '.split_win_height.' split +set\ winfixheight'
+    \ s:bufprefix.a:gistls
   endif
   if a:page > 1
     let oldlines = getline(0, line('$'))
