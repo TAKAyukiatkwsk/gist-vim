@@ -122,7 +122,7 @@ function! s:GistList(gistls, page)
     endif
     setlocal modifiable
   else
-    exec 'silent noautocmd split' s:bufprefix.a:gistls
+    exec 'silent noautocmd rightbelow 5 split +set\ winfixheight' s:bufprefix.a:gistls
   endif
   if a:page > 1
     let oldlines = getline(0, line('$'))
